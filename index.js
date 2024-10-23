@@ -5,6 +5,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const videoRoutes = require("./routes/videoRoutes");
 const timeTrackerRoutes = require("./routes/timeTrackerRoutes");
+const calculationRoutes = require("./routes/calculationRoutes");
 
 // Initialize Express
 const app = express();
@@ -28,6 +29,7 @@ mongoose
 app.use("/api/auth", authRoutes); // Authentication routes
 app.use("/api/videos", videoRoutes); // Video routes
 app.use("/api/timetracker", timeTrackerRoutes); // Time tracker routes
+app.use("/api/calculations", calculationRoutes);
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
