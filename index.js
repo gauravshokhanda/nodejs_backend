@@ -12,14 +12,16 @@ const app = express();
 dotenv.config();
 
 // Middleware
+const corsOpts = {
+  origin: "*",
+
+  methods: [GET, HEAD, PUT, PATCH, POST, DELETE],
+
+  allowedHeaders: ["Content-Type"],
+};
+
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed methods
-    credentials: true, // Allow credentials if necessary
-  })
-);
+app.use(cors(corsOpts));
 app.use("/uploads", express.static("uploads")); // Serve video files statically
 
 // Connect to MongoDB
