@@ -13,7 +13,17 @@ dotenv.config();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+  "http://jeffconstruction.netlify.app",
+  "http://localhost:3000",
+];
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed methods
+    credentials: true, // Allow credentials if necessary
+  })
+);
 app.use("/uploads", express.static("uploads")); // Serve video files statically
 
 // Connect to MongoDB
