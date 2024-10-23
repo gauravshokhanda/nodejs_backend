@@ -13,15 +13,9 @@ dotenv.config();
 
 // Middleware
 app.use(express.json());
-const allowedOrigins = [
-  "http://jeffconstruction.netlify.app",
-  "http://3.111.47.151:5000/api/auth/login",
-  "http://localhost:3000",
-  "https://jeffconstruction.netlify.app/login",
-];
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed methods
     credentials: true, // Allow credentials if necessary
   })
