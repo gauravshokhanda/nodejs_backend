@@ -15,6 +15,7 @@ dotenv.config();
 app.use(express.json());
 const allowedOrigins = [
   "http://jeffconstruction.netlify.app",
+  "http://3.111.47.151:5000/api/auth/login",
   "http://localhost:3000",
 ];
 app.use(
