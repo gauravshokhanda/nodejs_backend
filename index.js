@@ -15,7 +15,7 @@ dotenv.config();
 const corsOpts = {
   origin: "*",
 
-  methods: [GET, HEAD, PUT, PATCH, POST, DELETE],
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
 
   allowedHeaders: ["Content-Type"],
 };
