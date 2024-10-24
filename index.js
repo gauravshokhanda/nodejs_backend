@@ -12,7 +12,14 @@ const app = express();
 dotenv.config();
 
 // Middleware
-app.use(cors({ origin: "*", credentials: true })); // Allow all origins
+const corsOptions = {
+  origin: ["https://jeffconstruction.netlify.app"], // Replace with your frontend domain
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/uploads", express.static("uploads")); // Serve video files statically
 
