@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const videoRoutes = require("./routes/videoRoutes");
 const timeTrackerRoutes = require("./routes/timeTrackerRoutes");
 const calculationRoutes = require("./routes/calculationRoutes");
+const fs = require("fs");
 
 // Initialize Express
 const app = express();
@@ -20,7 +21,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use("/uploads", express.static("uploads")); // Serve video files statically
 
@@ -39,8 +39,21 @@ app.use("/api/videos", videoRoutes); // Video routes
 app.use("/api/timetracker", timeTrackerRoutes); // Time tracker routes
 app.use("/api/calculations", calculationRoutes);
 
+// Read SSL certificate files
+const privateKey = fs.readFileSync(
+  "/etc/letsencrypt/live/your_domain/privkey.pem",
+  "utf8"
+);
+const certificate = fs.readFileSync(
+  "/etc/letsencrypt/live/your_domain/fullchain.pem",
+  "utf8"
+);
+
+const credentials = { key: privateKey, cert: certificate };
+
 // Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
