@@ -13,10 +13,7 @@ dotenv.config();
 
 // Middleware
 const corsOptions = {
-  origin: [
-    "https://jeffconstruction.netlify.app",
-    "https://jeffconstruction.netlify.app",
-  ], // Replace with your frontend domain
+  origin: "*", // Replace with your frontend domain
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
