@@ -39,21 +39,8 @@ app.use("/api/videos", videoRoutes); // Video routes
 app.use("/api/timetracker", timeTrackerRoutes); // Time tracker routes
 app.use("/api/calculations", calculationRoutes);
 
-// Read SSL certificate files
-const privateKey = fs.readFileSync(
-  "/etc/letsencrypt/live/your_domain/privkey.pem",
-  "utf8"
-);
-const certificate = fs.readFileSync(
-  "/etc/letsencrypt/live/your_domain/fullchain.pem",
-  "utf8"
-);
-
-const credentials = { key: privateKey, cert: certificate };
-
 // Start server
 const PORT = process.env.PORT || 5000;
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
