@@ -4,6 +4,7 @@ const Calculation = require("../models/calculationModel");
 exports.createCalculation = async (req, res) => {
   try {
     const {
+      name,
       width,
       length,
       area,
@@ -16,6 +17,7 @@ exports.createCalculation = async (req, res) => {
     } = req.body;
 
     const newCalculation = new Calculation({
+      name,
       width,
       length,
       area,
