@@ -7,8 +7,8 @@ const videoRoutes = require("./routes/videoRoutes");
 const timeTrackerRoutes = require("./routes/timeTrackerRoutes");
 const calculationRoutes = require("./routes/calculationRoutes");
 const twoDImageRoutes = require("./routes/twoDimageRoutes");
-const getUsersRoutes = require("./routes/getUsersRoutes.js")
-
+const getUsersRoutes = require("./routes/getUsersRoutes.js");
+const costRoutes = require("./routes/costRoutes");
 
 // Initialize Express
 const app = express();
@@ -42,7 +42,7 @@ app.use("/api/timetracker", timeTrackerRoutes); // Time tracker routes
 app.use("/api/calculations", calculationRoutes);
 app.use("/api/2d-images", twoDImageRoutes);
 app.use("/api/getUsers", getUsersRoutes);
-
+app.use("/api/costs", costRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
