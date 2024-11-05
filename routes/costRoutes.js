@@ -17,4 +17,6 @@ router.put("/contractor/:id", contractorController.updateContractor);
 // Delete contractor
 router.delete("/contractor/:id", contractorController.deleteContractor);
 
+router.get("/contractor-costs", contractorController.getContractorsWithCost);
+
 module.exports = router;
