@@ -9,6 +9,7 @@ const calculationRoutes = require("./routes/calculationRoutes");
 const twoDImageRoutes = require("./routes/twoDimageRoutes");
 const getUsersRoutes = require("./routes/getUsersRoutes.js");
 const costRoutes = require("./routes/costRoutes");
+const propertyRoutes = require("./routes/propertyRoutes.js");
 
 // Initialize Express
 const app = express();
@@ -43,6 +44,7 @@ app.use("/api/calculations", calculationRoutes);
 app.use("/api/2d-images", twoDImageRoutes);
 app.use("/api/getUsers", getUsersRoutes);
 app.use("/api/costs", costRoutes);
+app.use("/api/properties", propertyRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;

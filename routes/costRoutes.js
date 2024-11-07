@@ -12,9 +12,11 @@ router.get("/contractor", contractorController.getAllContractors);
 router.get("/contractor/:id", contractorController.getContractorById);
 
 // Update contractor
-router.put("/contractor/:id", contractorController.updateContractor);
+router.put("/contractor:id", contractorController.updateContractor);
 
 // Delete contractor
 router.delete("/contractor/:id", contractorController.deleteContractor);
+
+router.get("/contractor-costs", contractorController.getContractorsWithCost);
 
 module.exports = router;

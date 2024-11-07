@@ -119,3 +119,52 @@ exports.deleteContractor = async (req, res) => {
       .json({ message: "Failed to delete contractor", error: error.message });
   }
 };
+
+// Calculate total cost based on area or length
+exports.getContractorsWithCost = async (req, res) => {
+  try {
+    const { area, length } = req.query;
+
+    // Check if area or length is provided
+    if (!area && !length) {
+      return res
+        .status(400)
+        .json({ message: "Please provide either area or length" });
+    }
+
+    // Fetch all contractors
+    const contractors = await Contractor.find().populate("user", "email");
+
+    // Calculate total cost for each contractor
+    const contractorsWithCost = contractors.map((contractor) => {
+      const laborCharge = contractor.laborChargePerSqFt * (area || length);
+      const singleStoryCost = contractor.singleStoryCharge * (area || length);
+      const twoStoryCost = contractor.twoStoryCharge * (area || length);
+
+      const rates = contractor.rates;
+      const totalRatesCost = Object.values(rates).reduce(
+        (total, rate) => total + rate * (area || length),
+        0
+      );
+
+      // Calculate total cost based on all components
+      const totalCost =
+        laborCharge + singleStoryCost + twoStoryCost + totalRatesCost;
+
+      return {
+        contractorId: contractor._id,
+        contractor: contractor,
+        // contractorEmail: contractor.user.email,
+        totalCost,
+      };
+    });
+
+    res.status(200).json(contractorsWithCost);
+  } catch (error) {
+    console.error("Error calculating contractor costs:", error.message);
+    res.status(500).json({
+      message: "Failed to calculate contractor costs",
+      error: error.message,
+    });
+  }
+};
