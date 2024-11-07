@@ -35,7 +35,7 @@ exports.createContractor = async (req, res) => {
       rates,
     });
 
-    // Save contractor to the database
+    // 
     await contractor.save();
     res
       .status(201)
